@@ -38,6 +38,8 @@ SpikingDiffusion/
 ├── 3_spiking_diffusion_audio.ipynb
 │
 └── README.md
+└── requirement.txt
+└──LICENSE
 ```
 
 ---
