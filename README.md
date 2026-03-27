@@ -145,7 +145,7 @@ These metrics provide insight into reconstruction accuracy and signal structure.
 ## Requirements
 
 ```bash
-pip install torch torchvision snntorch matplotlib tqdm
+pip install -r requirements.txt
 ```
 ## Acknowledgement
 This project is an exploratory research prototype aimed at understanding the intersection of:
