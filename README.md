@@ -39,7 +39,7 @@ SpikingDiffusion/
 │
 └── README.md
 └── requirement.txt
-└──LICENSE
+└── LICENSE
 ```
 
 ---
