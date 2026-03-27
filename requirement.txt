@@ -1,5 +1,7 @@
 torch
 torchvision
-norse
 numpy
 matplotlib
+snntorch
+tqdm
+soundfile
