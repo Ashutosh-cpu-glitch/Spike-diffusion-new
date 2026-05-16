@@ -42,15 +42,15 @@ The forward diffusion process progressively corrupts an image by adding Gaussian
 
 At timestep `t`:
 
-\[
+$$
 x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon
-\]
+$$
 
 where:
 
-- \(x_0\) is the original image
-- \(\epsilon\) is Gaussian noise
-- \(\bar{\alpha}_t\) controls accumulated noise intensity
+- $x_0$ is the original image  
+- $\epsilon$ is Gaussian noise  
+- $\bar{\alpha}_t$ controls accumulated noise intensity  
 
 As diffusion timesteps increase, image quality gradually degrades.
 
