@@ -1,157 +1,210 @@
-# SpikingDiffusion-Neuromorphic-Modeling
+# SpikeDiffusion  
+### Diffusion-Inspired Gaussian Image Denoising using Spiking Neural Networks
 
-This project explores a diffusion-inspired generative modeling prototype using Spiking Neural Networks (SNNs) for image and audio data. The goal is to investigate whether spike-based neural systems can learn to represent, reconstruct, and iteratively refine signals under stochastic corruption.
+SpikeDiffusion is an experimental deep learning project that explores whether Spiking Neural Networks (SNNs) can learn diffusion-style Gaussian image denoising on the MNIST dataset.
 
----
+The project combines a lightweight residual spiking architecture with a simplified diffusion process to study how spike-based temporal computation behaves in image restoration tasks.
 
-## Project Overview
-
-This repository implements a prototype diffusion-style framework using SNNs, along with supporting experiments in image reconstruction and spike-based signal processing.
-
-The project is divided into three main components:
-
-* Spiking Autoencoder (MNIST)
-* Spiking Diffusion Denoising Model (MNIST)
-* Spiking Diffusion for Audio (Exploratory Prototype)
-
-The emphasis is on:
-
-* Understanding spike-based representations
-* Exploring denoising as a generative principle
-* Evaluating the feasibility of neuromorphic generative modeling
+Rather than focusing on large-scale image generation, this work investigates the feasibility of using spike-driven neural dynamics for noise prediction and image reconstruction.
 
 ---
 
-## Repository Structure
+# Project Motivation
 
+Diffusion models have recently shown strong performance in image restoration and generative modeling by learning to reverse progressive noise corruption. However, most modern diffusion systems rely on computationally intensive deep neural networks and transformer-based architectures.
+
+In contrast, Spiking Neural Networks process information through discrete spike activity and temporal membrane dynamics, making them biologically inspired and potentially more computationally efficient in neuromorphic settings.
+
+This project explores the intersection of these two areas by asking a simple research-oriented question:
+
+> Can a lightweight residual spiking neural network learn diffusion-style Gaussian denoising behavior?
+
+---
+
+# Objectives
+
+The main objectives of this work are:
+
+- Implement Gaussian forward diffusion corruption
+- Design a residual spiking convolutional architecture
+- Train the model to predict injected Gaussian noise
+- Reconstruct cleaner images from noisy inputs
+- Evaluate denoising performance quantitatively and visually
+- Explore diffusion learning behavior in spike-based neural systems
+
+---
+
+# Methodology
+
+## Forward Diffusion
+
+The forward diffusion process progressively corrupts an image by adding Gaussian noise over multiple timesteps.
+
+At timestep `t`:
+
+\[
+x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon
+\]
+
+where:
+
+- \(x_0\) is the original image
+- \(\epsilon\) is Gaussian noise
+- \(\bar{\alpha}_t\) controls accumulated noise intensity
+
+As diffusion timesteps increase, image quality gradually degrades.
+
+---
+
+## Spiking Residual Architecture
+
+The denoising model is built using:
+
+- Convolutional feature extraction
+- Residual learning
+- Leaky Integrate-and-Fire (LIF) neurons
+- Group normalization
+- Temporal spike simulation
+- Sinusoidal timestep embeddings
+
+The architecture predicts the Gaussian noise added during forward diffusion.
+
+### Key Design Choices
+
+- Residual convolution blocks for stable optimization
+- Spike-based temporal dynamics using `snntorch`
+- Lightweight channel configuration for efficient experimentation
+- Time-conditioned processing using sinusoidal embeddings
+
+---
+
+## Training Strategy
+
+During training:
+
+1. Random diffusion timesteps are sampled
+2. Gaussian noise is injected into MNIST images
+3. The noisy image is passed through the spiking network
+4. The model predicts the injected noise
+5. Mean Squared Error (MSE) loss is minimized
+
+### Optimization Setup
+
+- Optimizer: AdamW
+- Scheduler: CosineAnnealingLR
+- Loss Function: MSE Loss
+
+---
+
+# Dataset
+
+The project uses the MNIST handwritten digit dataset.
+
+- Training Samples: 60,000
+- Test Samples: 10,000
+- Image Size: 28 × 28 grayscale
+
+MNIST was chosen to keep the study computationally manageable while focusing on the behavior of the spiking diffusion framework itself.
+
+---
+
+# Technologies Used
+
+```python
+Python
+PyTorch
+snntorch
+Torchvision
+Matplotlib
+tqdm
 ```
-SpikingDiffusion/
+
+---
+
+# Experimental Results
+
+After training for 10 epochs, the model demonstrated measurable denoising capability on unseen MNIST test samples.
+
+### Evaluation Results
+
+```text
+Average Noisy MSE    : 0.066020
+Average Denoised MSE : 0.004450
+Improvement          : 93.26%
+```
+
+The notebook also includes:
+
+- Forward diffusion visualization
+- Denoising reconstruction examples
+- Training loss analysis
+- Qualitative comparison between original, noisy, and reconstructed images
+
+---
+
+# Key Observations
+
+- The residual spiking network successfully learned Gaussian noise prediction
+- Denoised outputs were significantly closer to original images than noisy inputs
+- Residual convolutional processing helped preserve spatial structure
+- Temporal spike dynamics participated effectively in denoising behavior
+
+---
+
+# Limitations
+
+This work is intentionally exploratory and has several limitations:
+
+- Focused on denoising rather than full image generation
+- Uses a lightweight architecture
+- Reverse diffusion sampling is simplified
+- Computational cost increases due to temporal spike simulation
+- Experiments are limited to MNIST-scale data
+
+---
+
+# Future Directions
+
+Possible extensions of this work include:
+
+- Multi-step reverse diffusion sampling
+- Spiking U-Net architectures
+- Hybrid ANN-SNN diffusion systems
+- Attention-based spike diffusion models
+- Larger and more complex datasets
+- Neuromorphic hardware deployment
+
+---
+
+# Research Perspective
+
+This project was developed as an exploratory study at the intersection of:
+
+- Spiking Neural Networks
+- Diffusion-based learning
+- Temporal neural computation
+- Image restoration systems
+
+The goal was not to reproduce state-of-the-art diffusion performance, but to investigate whether spike-based neural processing can meaningfully participate in diffusion-inspired denoising tasks.
+
+---
+
+# Repository Structure
+
+```text
+SpikeDiffusion/
 │
-├── core/
-│   ├── __init__.py
-│   ├── models.py
-│   ├── diffusion.py
-│   ├── utils.py
-│
-├── 1_spiking_autoencoder_mnist.ipynb
-├── 2_spiking_diffusion_denoising_mnist.ipynb
-├── 3_spiking_diffusion_audio.ipynb
-│
-└── README.md
-└── requirement.txt
-└── LICENSE
+├── Spike_Diffusion_Denoising.ipynb
+├── README.md
+├── LICENSE
+├── requirement.txt
+└── results/
 ```
 
 ---
 
-## Methods and Concepts
+# Conclusion
 
-### 🔹 Spiking Neural Networks (SNNs)
+This study demonstrates that a lightweight residual spiking neural network can learn diffusion-style Gaussian image denoising behavior on MNIST images.
 
-The models are implemented using Leaky Integrate-and-Fire (LIF) neurons via snnTorch, enabling temporal spike-based computation.
-
-### 🔹 Rate Coding
-
-Static inputs (images and signals) are converted into spike trains using rate coding, where intensity is represented by firing frequency.
-
-### 🔹 Diffusion-style Modeling
-
-A simplified diffusion formulation is used:
-
-x_t = sqrt(alpha_bar_t) * x0 + sqrt(1 - alpha_bar_t) * epsilon
-
-* Forward process: progressively corrupt data with noise
-* Reverse process: train a model to approximate a reverse mapping from corrupted inputs
-
-### 🔹 Poisson Spike Noise
-
-Noise is modeled using a Poisson-like process, inspired by stochastic spike generation.
-
----
-
-## Notebooks
-
-### 1️⃣ Spiking Autoencoder (MNIST)
-
-* Encodes images into spike trains using rate coding
-* Reconstructs images from spike activity
-* Demonstrates that SNNs can learn to reconstruct input data from spike-based representations
-
-**Key idea:**
-Spike rates encode information, and temporal averaging recovers the signal.
-
----
-
-### 2️⃣ Spiking Diffusion Denoising (MNIST)
-
-* Implements a diffusion-style corruption process
-* Trains a spiking neural network to predict injected noise
-* Demonstrates partial denoising behavior
-
-**Key Result:**
-Quantitative evaluation shows:
-MSE(Noisy vs Original) > MSE(Denoised vs Original)
-
-This indicates that the model learns to partially reverse corruption under a diffusion-style objective.
-
-**Note:**
-Full generative sampling from pure noise is computationally expensive, especially with SNNs. This experiment focuses on validating the denoising objective.
-
----
-
-### 3️⃣ Spiking Diffusion for Audio (Exploratory Prototype)
-
-* Encodes a synthetic waveform into spike trains using rate coding
-* Trains a spiking neural network to map noisy inputs to structured signal outputs
-* Applies an iterative update procedure to generate a waveform from random initialization
-
-This experiment explores whether spike-based models can learn signal refinement behavior under a diffusion-inspired training setup.
-
----
-
-## Evaluation
-
-Evaluation is task-dependent:
-
-* **Image-based experiments:**
-  Mean Squared Error (MSE) is used to compare reconstructed or denoised outputs with original inputs
-
-* **Audio experiments:**
-  Signal-level statistics are computed, including power, variance, spectral energy, and zero-crossing rate
-
-These metrics provide insight into reconstruction accuracy and signal structure.
-
----
-
-## Limitations
-
-* Diffusion-style models are computationally expensive
-* Training SNNs with surrogate gradients is non-trivial
-* The current implementation is a prototype, not a fully converged generative system
-* Generated outputs, particularly in audio, remain limited in complexity
-
----
-
-## Key Takeaways
-
-* SNNs can encode and reconstruct signals using spike-based representations
-* Diffusion-style denoising can be implemented with spiking neurons
-* Quantitative results indicate consistent reduction in reconstruction error after denoising
-* This project provides a foundation for exploring neuromorphic generative modeling
-
----
----
-
-## Requirements
-
-```bash
-pip install -r requirements.txt
-```
-## Acknowledgement
-This project is an exploratory research prototype aimed at understanding the intersection of:
-
--Neuromorphic computing
-
--Generative modeling
-
--Spike-based information processing
+The results suggest that spike-based temporal computation can be integrated with diffusion-inspired learning objectives for image restoration tasks, while also opening possibilities for future exploration in neuromorphic diffusion systems.
