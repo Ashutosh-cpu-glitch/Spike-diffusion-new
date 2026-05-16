@@ -197,8 +197,11 @@ SpikeDiffusion/
 ├── Spike_Diffusion_Denoising.ipynb
 ├── README.md
 ├── LICENSE
-├── requirement.txt
+├── requirements.txt
 └── results/
+    ├── forward_diffusion.png
+    ├── training_loss.png
+    └──denoising_result.png
 ```
 
 ---
