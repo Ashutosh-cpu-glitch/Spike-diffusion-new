@@ -136,11 +136,11 @@ Improvement          : 93.26%
 The notebook also includes:
 
 - Forward diffusion visualization
-- ![Forward Diffusion](results/forward_diffusion.png)
+- ![Forward Diffusion](images/forward_diffusion.png)
 - Training loss analysis
-- ![Training Loss](results/training_loss.png)
+- ![Training Loss](images/training_loss.png)
 - Qualitative comparison between original, noisy, and reconstructed images
-- ![Denoising Result](results/denoising_result.png)
+- ![Denoising Result](images/denoising_result.png)
 
 ---
 
