@@ -136,9 +136,11 @@ Improvement          : 93.26%
 The notebook also includes:
 
 - Forward diffusion visualization
-- Denoising reconstruction examples
+- ![Forward Diffusion](results/forward_diffusion.png)
 - Training loss analysis
+- ![Training Loss](results/training_loss.png)
 - Qualitative comparison between original, noisy, and reconstructed images
+- ![Denoising Result](results/denoising_result.png)
 
 ---
 
@@ -201,7 +203,7 @@ SpikeDiffusion/
 └── results/
     ├── forward_diffusion.png
     ├── training_loss.png
-    └──denoising_result.png
+    └── denoising_result.png
 ```
 
 ---
