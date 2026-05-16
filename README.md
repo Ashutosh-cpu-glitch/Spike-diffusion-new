@@ -5,15 +5,15 @@ SpikeDiffusion is an experimental deep learning project that explores whether Sp
 
 The project combines a lightweight residual spiking architecture with a simplified diffusion process to study how spike-based temporal computation behaves in image restoration tasks.
 
-Rather than focusing on large-scale image generation, this work investigates the feasibility of using spike-driven neural dynamics for noise prediction and image reconstruction.
+This work investigates the feasibility of using spike-driven neural dynamics for noise prediction and image reconstruction.
 
 ---
 
 # Project Motivation
 
-Diffusion models have recently shown strong performance in image restoration and generative modeling by learning to reverse progressive noise corruption. However, most modern diffusion systems rely on computationally intensive deep neural networks and transformer-based architectures.
+Diffusion models have recently shown strong performance in image restoration and generative modeling by learning to reverse progressive noise corruption. However, most modern diffusion systems depend on computationally intensive deep neural networks and transformer-based architectures.
 
-In contrast, Spiking Neural Networks process information through discrete spike activity and temporal membrane dynamics, making them biologically inspired and potentially more computationally efficient in neuromorphic settings.
+In contrast, Spiking Neural Networks process information through discrete spike activity and temporal membrane dynamics. It makes them biologically inspired and potentially more computationally efficient in neuromorphic settings.
 
 This project explores the intersection of these two areas by asking a simple research-oriented question:
 
